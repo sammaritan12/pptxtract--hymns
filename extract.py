@@ -46,6 +46,10 @@ for i in range(len(file_dir)):
                 current_hymn.append(shape.text)
     hymns.append(current_hymn)
 
+for j in range(len(hymns)):
+    if len(hymns[j]) == 0:
+        print(file_names[j], "Length: 0")
+
 for h in range(len(hymns)):
 
     prs = Presentation()
