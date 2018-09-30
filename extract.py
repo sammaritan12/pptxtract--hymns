@@ -20,13 +20,16 @@ def filenames_only(filenames):
             if i[j] == '/':
                 named_files.append(i[j+1:])
                 continue
+            elif i[j] == '\\':
+                named_files.append(i[j+2:])
+                continue
     return named_files
                 
 
-# if len(argv) < 3:
-#     print("Enter a directory to extract, and directory to place")
-#     print("extract.py <dir to extract> <dir to place>")
-#     quit()
+if len(argv) < 3:
+    print("Enter a directory to extract, and directory to place")
+    print("extract.py <dir to extract> <dir to place>")
+    quit()
 
 file_dir = list_filenames(argv[1])
 file_names = filenames_only(file_dir)
@@ -72,11 +75,13 @@ for h in range(len(hymns)):
         tf = txBox.text_frame
         tf.text = hymns[h][i]
 
-        tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+        # Change size and font
         tf.paragraphs[0].font.name = 'Arial'
-        tf.fit_text(font_family='Calibri')
+        tf.paragraphs[0].font.size = Pt(32)
 
-        # tf.text= 'abc'
+        tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+
+    print('{}/{} Powerpoint Finished'.format(h+1, len(hymns)))
 
     # Save file
     prs.save(argv[2]+'/'+file_names[h])
