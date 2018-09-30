@@ -77,7 +77,8 @@ for h in range(len(hymns)):
 
         # Change size and font
         tf.paragraphs[0].font.name = 'Arial'
-        tf.paragraphs[0].font.size = Pt(32)
+        tf.paragraphs[0].font.size = Pt(30)
+        tf.paragraphs[0].font.bold = True
 
         tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
 
