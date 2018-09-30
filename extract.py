@@ -81,7 +81,7 @@ for h in range(len(hymns)):
 
         tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
 
-    print('{}/{} Powerpoint Finished'.format(h+1, len(hymns)))
+    print('{}/{} {} Processed'.format(h+1, len(hymns), file_names[h]))
 
     # Save file
     prs.save(argv[2]+'/'+file_names[h])
