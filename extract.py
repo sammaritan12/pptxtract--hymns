@@ -1,10 +1,9 @@
-import pickle
 from glob import glob
 from sys import argv
 
 from pptx import Presentation
-from pptx.util import Inches, Pt, Cm
 from pptx.enum.text import MSO_AUTO_SIZE
+from pptx.util import Cm, Inches, Pt
 
 
 def list_filenames(dirpath):
