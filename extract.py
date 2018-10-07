@@ -65,6 +65,7 @@ for h in range(len(hymns)):
     title = title_slide.shapes.title
     title.text = hymns[h][0]
     title.text_frame.paragraphs[0].font.name = 'Arial'
+    title.text_frame.paragraphs[0].font.bold = True
     title.text_frame.paragraphs[0].font.color.rgb = text_colour
 
     # Add picture
@@ -82,14 +83,14 @@ for h in range(len(hymns)):
         blank_slide_layout = prs.slide_layouts[6]
         slide = prs.slides.add_slide(blank_slide_layout)
 
+        # Add background image
         pic = slide.shapes.add_picture(images_path[h % len(images_path)], 0, 0, width=prs.slide_width , height=prs.slide_height)
 
         # 1 cm from top and left
         left = top = Cm(1)
 
-        # Encompass width of all, and 2/3 of height
+        # Encompass width and height of all
         width = prs.slide_width - Cm(2)
-        # height = (prs.slide_height/3)*2 - Cm(2)
         height = prs.slide_height- Cm(2)
         
         # Add lyrics
@@ -97,16 +98,12 @@ for h in range(len(hymns)):
         tf = txBox.text_frame
         tf.text = hymns[h][i]
 
-        tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
-
-        # Change size and font
+        # Change size, font and colour
         tf.paragraphs[0].font.name = 'Arial'
-        tf.paragraphs[0].font.size = Pt(30)
+        tf.paragraphs[0].font.size = Pt(34)
         tf.paragraphs[0].font.color.rgb = text_colour
         tf.paragraphs[0].font.bold = True
-        tf.paragraphs[0].alignment = PP_ALIGN.CENTER
-
-        
+        tf.paragraphs[0].alignment = PP_ALIGN.CENTER   
 
     print('{}/{} {} Processed'.format(h+1, len(hymns), pptx_file_names[h]))
 
