@@ -4,13 +4,14 @@ from sys import argv
 from pptx import Presentation
 from pptx.enum.text import MSO_AUTO_SIZE, PP_ALIGN
 from pptx.util import Cm, Inches, Pt
+from pptx.dml.color import RGBColor
 
 
-def list_filenames(dirpath):
-    if type(dirpath) is not str:
-        raise TypeError('dirpath must be a string')
+def list_filenames(dirpath, file_type):
+    if type(dirpath) is not str or type(file_type) is not str:
+        raise TypeError('dirpath and filetype must both be strings')
 
-    return glob(dirpath + '/**/*.pptx', recursive=True)
+    return glob(dirpath + '/**/*.' + file_type, recursive=True)
 
 def filenames_only(filenames):
     named_files = []
@@ -25,18 +26,20 @@ def filenames_only(filenames):
     return named_files
                 
 
-if len(argv) < 3:
+if len(argv) < 5:
     print("Enter a directory to extract, and directory to place")
-    print("extract.py <dir to extract> <dir to place>")
+    print("extract.py <dir to extract> <dir to place> <background images> <text colour>")
     quit()
 
-file_dir = list_filenames(argv[1])
-file_names = filenames_only(file_dir)
+pptx_file_dir = list_filenames(argv[1], 'pptx')
+pptx_file_names = filenames_only(pptx_file_dir)
+images_path = list_filenames(argv[3], 'jpg')
 hymns = []
+text_colour = RGBColor(255, 255, 255) if argv[4].lower() == 'white' else RGBColor(0,0,0)
 
-for i in range(len(file_dir)):
+for i in range(len(pptx_file_dir)):
     current_hymn = []
-    prs = Presentation(file_dir[i])
+    prs = Presentation(pptx_file_dir[i])
 
     for slide in prs.slides:
         for shape in slide.shapes:
@@ -48,7 +51,7 @@ for i in range(len(file_dir)):
 
 for j in range(len(hymns)):
     if len(hymns[j]) == 0:
-        print(file_names[j], "Length: 0")
+        print(pptx_file_names[j], "Length: 0")
 
 for h in range(len(hymns)):
 
@@ -57,14 +60,29 @@ for h in range(len(hymns)):
     # Create Title Slide
     title_slide_layout = prs.slide_layouts[0]
     title_slide = prs.slides.add_slide(title_slide_layout)
+
+    # Add title
     title = title_slide.shapes.title
     title.text = hymns[h][0]
     title.text_frame.paragraphs[0].font.name = 'Arial'
+    title.text_frame.paragraphs[0].font.color.rgb = text_colour
+
+    # Add picture
+    pic = title_slide.shapes.add_picture(images_path[h % len(images_path)], 0, 0)
+    pic.height = prs.slide_height
+    pic.width = prs.slide_width
+
+    # Put background in back
+    title_slide.shapes._spTree.remove(pic._element)
+    title_slide.shapes._spTree.insert(2, pic._element)
+
 
     for i in range(1, len(hymns[h])):
         # Create Blank slide
         blank_slide_layout = prs.slide_layouts[6]
         slide = prs.slides.add_slide(blank_slide_layout)
+
+        pic = slide.shapes.add_picture(images_path[h % len(images_path)], 0, 0, width=prs.slide_width , height=prs.slide_height)
 
         # 1 cm from top and left
         left = top = Cm(1)
@@ -83,13 +101,14 @@ for h in range(len(hymns)):
 
         # Change size and font
         tf.paragraphs[0].font.name = 'Arial'
-        tf.paragraphs[0].font.size = Pt(34)
+        tf.paragraphs[0].font.size = Pt(30)
+        tf.paragraphs[0].font.color.rgb = text_colour
         tf.paragraphs[0].font.bold = True
         tf.paragraphs[0].alignment = PP_ALIGN.CENTER
 
         
 
-    print('{}/{} {} Processed'.format(h+1, len(hymns), file_names[h]))
+    print('{}/{} {} Processed'.format(h+1, len(hymns), pptx_file_names[h]))
 
     # Save file
-    prs.save(argv[2]+'/'+file_names[h])
+    prs.save(argv[2]+'/'+pptx_file_names[h])
