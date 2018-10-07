@@ -2,7 +2,7 @@ from glob import glob
 from sys import argv
 
 from pptx import Presentation
-from pptx.enum.text import MSO_AUTO_SIZE
+from pptx.enum.text import MSO_AUTO_SIZE, PP_ALIGN
 from pptx.util import Cm, Inches, Pt
 
 
@@ -20,7 +20,7 @@ def filenames_only(filenames):
                 named_files.append(i[j+1:])
                 continue
             elif i[j] == '\\':
-                named_files.append(i[j+2:])
+                named_files.append(i[j+1:])
                 continue
     return named_files
                 
@@ -71,19 +71,23 @@ for h in range(len(hymns)):
 
         # Encompass width of all, and 2/3 of height
         width = prs.slide_width - Cm(2)
-        height = (prs.slide_height/3)*2 - Cm(2)
+        # height = (prs.slide_height/3)*2 - Cm(2)
+        height = prs.slide_height- Cm(2)
         
         # Add lyrics
         txBox = slide.shapes.add_textbox(left, top, width, height)
         tf = txBox.text_frame
         tf.text = hymns[h][i]
 
+        tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+
         # Change size and font
         tf.paragraphs[0].font.name = 'Arial'
-        tf.paragraphs[0].font.size = Pt(30)
+        tf.paragraphs[0].font.size = Pt(34)
         tf.paragraphs[0].font.bold = True
+        tf.paragraphs[0].alignment = PP_ALIGN.CENTER
 
-        tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+        
 
     print('{}/{} {} Processed'.format(h+1, len(hymns), file_names[h]))
 
