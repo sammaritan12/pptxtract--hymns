@@ -1,5 +1,6 @@
 from glob import glob
 from sys import argv
+from re import sub
 
 from pptx import Presentation
 from pptx.enum.text import MSO_AUTO_SIZE, PP_ALIGN
@@ -31,28 +32,38 @@ if len(argv) < 5:
     print("extract.py <dir to extract> <dir to place> <background images> <text colour>")
     quit()
 
+# Get all pptx files and image files
 pptx_file_dir = list_filenames(argv[1], 'pptx')
 pptx_file_names = filenames_only(pptx_file_dir)
 images_path = list_filenames(argv[3], 'jpg')
+
+# List of hymns
 hymns = []
+
+# Change colour, normally black if none supplied
 text_colour = RGBColor(255, 255, 255) if argv[4].lower() == 'white' else RGBColor(0,0,0)
 
+# Extract the hymn texts into a list of strings
 for i in range(len(pptx_file_dir)):
     current_hymn = []
     prs = Presentation(pptx_file_dir[i])
 
+    # Choose only objects which have text
     for slide in prs.slides:
         for shape in slide.shapes:
             if not shape.has_text_frame:
                 continue
-            if not shape.text == '':
-                current_hymn.append(shape.text)
+            if not shape.text.strip() == '':
+                # current_hymn.append(shape.text)
+                current_hymn.append(sub(' +', ' ', '\n'.join(list(map(lambda x: x.strip(), shape.text.split('\n'))))))
     hymns.append(current_hymn)
 
+# See if any extracfted hymns are empty
 for j in range(len(hymns)):
     if len(hymns[j]) == 0:
         print(pptx_file_names[j], "Length: 0")
 
+# Start creating powerpoints for all of the extracted hymns
 for h in range(len(hymns)):
 
     prs = Presentation()
@@ -64,6 +75,7 @@ for h in range(len(hymns)):
     # Add title
     title = title_slide.shapes.title
     title.text = hymns[h][0]
+    title.text_frame.word_wrap = True
     title.text_frame.paragraphs[0].font.name = 'Arial'
     title.text_frame.paragraphs[0].font.bold = True
     title.text_frame.paragraphs[0].font.color.rgb = text_colour
@@ -96,6 +108,7 @@ for h in range(len(hymns)):
         # Add lyrics
         txBox = slide.shapes.add_textbox(left, top, width, height)
         tf = txBox.text_frame
+        tf.word_wrap = True
         tf.text = hymns[h][i]
 
         # Change size, font and colour
