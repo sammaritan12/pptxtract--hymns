@@ -1,6 +1,7 @@
 from glob import glob
 from sys import argv
 from re import sub
+from os.path import basename
 
 from pptx import Presentation
 from pptx.enum.text import MSO_AUTO_SIZE, PP_ALIGN
@@ -26,7 +27,6 @@ def filenames_only(filenames):
                 named_files.append(i[j+1:])
                 continue
     return named_files
-                
 
 if len(argv) < 6:
     print("Enter the following args")
@@ -42,7 +42,8 @@ aspect_ratio = argv[5]
 
 # Get all pptx files and image files
 pptx_file_dir = list_filenames(extract_dir, 'pptx')
-pptx_file_names = filenames_only(pptx_file_dir)
+# pptx_file_names = filenames_only(pptx_file_dir)
+pptx_file_names =  list(map(lambda x: basename(x), pptx_file_dir))
 images_path = list_filenames(image_dir, 'jpg')
 
 # List of hymns
