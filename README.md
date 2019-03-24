@@ -27,5 +27,5 @@ pip install python-pptx
 ## How to run
 
 ```bash
-"extract.py <dir to extract> <dir to place> <background images> <text colour> <wide/normal>"
+extract.py <dir to extract> <dir to place> <background images> <text colour> <wide/normal>
 ```
