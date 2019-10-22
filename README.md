@@ -10,7 +10,7 @@ Will only work if powerpoint file is `.pptx`, and the powerpoint layout is as fo
 
 ## Converting PPT to PPTX
 
-To convert multiple PPT files to PPTX, you must download LibreOFfice and run the following command on to your terminal and it will create a PPTX file for every ppt file within the current working directory.
+To convert multiple PPT files to PPTX, you must download LibreOffice and run the following command on to your terminal and it will create a PPTX file for every ppt file within the current working directory.
 
 ```bash
 libreoffice --headless --convert-to pptx *.ppt
