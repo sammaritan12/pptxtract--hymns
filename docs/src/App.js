@@ -33,7 +33,7 @@ function App() {
           </p>
         </div>
       </Content>
-      <Footer style={{ textAlign: "center", position: "sticky", bottom: "0" }}>
+      <Footer>
         Mark Patricio 2019.
       </Footer>
     </div>
