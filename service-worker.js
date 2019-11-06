@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pptxtract-hymns/precache-manifest.0054cb3e56a7eed1f0e66f724c47d53f.js"
+  "/pptxtract-hymns/precache-manifest.ae9b2148788030d0b28b825495294a5d.js"
 );
 
 self.addEventListener('message', (event) => {
