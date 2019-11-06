@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/pptxtract-hymns/static/css/main.7edca76d.chunk.css",
+    "main.js": "/pptxtract-hymns/static/js/main.453ff696.chunk.js",
+    "main.js.map": "/pptxtract-hymns/static/js/main.453ff696.chunk.js.map",
+    "runtime-main.js": "/pptxtract-hymns/static/js/runtime-main.dcef3d7b.js",
+    "runtime-main.js.map": "/pptxtract-hymns/static/js/runtime-main.dcef3d7b.js.map",
+    "static/css/2.7ececfe9.chunk.css": "/pptxtract-hymns/static/css/2.7ececfe9.chunk.css",
+    "static/js/2.e2b7324b.chunk.js": "/pptxtract-hymns/static/js/2.e2b7324b.chunk.js",
+    "static/js/2.e2b7324b.chunk.js.map": "/pptxtract-hymns/static/js/2.e2b7324b.chunk.js.map",
+    "index.html": "/pptxtract-hymns/index.html",
+    "precache-manifest.0054cb3e56a7eed1f0e66f724c47d53f.js": "/pptxtract-hymns/precache-manifest.0054cb3e56a7eed1f0e66f724c47d53f.js",
+    "service-worker.js": "/pptxtract-hymns/service-worker.js",
+    "static/css/2.7ececfe9.chunk.css.map": "/pptxtract-hymns/static/css/2.7ececfe9.chunk.css.map",
+    "static/css/main.7edca76d.chunk.css.map": "/pptxtract-hymns/static/css/main.7edca76d.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dcef3d7b.js",
+    "static/css/2.7ececfe9.chunk.css",
+    "static/js/2.e2b7324b.chunk.js",
+    "static/css/main.7edca76d.chunk.css",
+    "static/js/main.453ff696.chunk.js"
+  ]
+}
