@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b767603b0477f271906b1f05a0f8029c",
+    "revision": "d674fefd3ed2d034cfc6f1824c3ec43a",
     "url": "/pptxtract-hymns/index.html"
   },
   {
