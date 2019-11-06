@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d674fefd3ed2d034cfc6f1824c3ec43a",
+    "revision": "7e5a45255eecd4d95beadea77a866264",
     "url": "/pptxtract-hymns/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pptxtract-hymns/static/css/2.7ececfe9.chunk.css"
   },
   {
-    "revision": "4d7deef61ad4863a0181",
+    "revision": "8852a11ba43d1f5c0d62",
     "url": "/pptxtract-hymns/static/css/main.7edca76d.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pptxtract-hymns/static/js/2.e2b7324b.chunk.js"
   },
   {
-    "revision": "4d7deef61ad4863a0181",
-    "url": "/pptxtract-hymns/static/js/main.453ff696.chunk.js"
+    "revision": "8852a11ba43d1f5c0d62",
+    "url": "/pptxtract-hymns/static/js/main.5debfbc4.chunk.js"
   },
   {
     "revision": "a1edbac6f0d10d7ea8ab",
