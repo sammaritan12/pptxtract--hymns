@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Link } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-export default function Copyright() {
+function Copyright() {
   const useStyles = makeStyles(theme => ({
     copyright: {
       margin: theme.spacing(3)
@@ -26,3 +26,5 @@ export default function Copyright() {
     </Typography>
   );
 }
+
+export default Copyright;

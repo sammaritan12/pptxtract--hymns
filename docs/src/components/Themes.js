@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 
-export default function Themes() {
+function Themes() {
   const [value, setValue] = React.useState("light");
 
   const handleChange = event => {
@@ -23,3 +23,5 @@ export default function Themes() {
     </FormControl>
   );
 }
+
+export default Themes;

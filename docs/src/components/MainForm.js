@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MainForm() {
+function MainForm() {
   const classes = useStyles();
 
   return (
@@ -103,3 +103,5 @@ export default function MainForm() {
     </Container>
   );
 }
+
+export default MainForm;
