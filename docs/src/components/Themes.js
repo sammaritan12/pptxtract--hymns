@@ -5,14 +5,16 @@ import {
   Radio,
   RadioGroup
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 
-function Themes() {
-  const [value, setValue] = React.useState("light");
+function Themes({stateValue, changeStateValue}) {
+  const [value, setValue] = useState(stateValue);
 
-  const handleChange = event => {
-    setValue(event.target.value);
-  };
+  const handleChange = e => {
+    setValue(e.target.value);
+    changeStateValue(e);
+  }
+
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">Theme</FormLabel>

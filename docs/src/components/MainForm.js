@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
-import React from "react";
+import React, { useState } from "react";
 import Themes from "./Themes";
 import Copyright from "./Copyright";
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   },
   avatar: {
-    margin: theme.spacing(2),
+    marginBottom: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
   copyright: {
@@ -35,11 +35,22 @@ const useStyles = makeStyles(theme => ({
 function MainForm() {
   const classes = useStyles();
 
+  const [values, setValues] = useState({
+    author: "",
+    title: "",
+    lyrics: "",
+    theme: "light"
+  });
+
+  const handleChange = ({target: {name, value}}) => {
+    setValues({...values, [name]: value});
+  };
+
   return (
     <Container component="main" maxWidth="xs" className="App">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar classname={classes.avatar}>
+        <Avatar className={classes.avatar}>
           <QueueMusicIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -57,9 +68,11 @@ function MainForm() {
                 variant="outlined"
                 required
                 fullWidth
-                id="author"
+                name="author"
                 label="Author"
                 autoFocus
+                value={values.author}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} s={12}>
@@ -68,8 +81,10 @@ function MainForm() {
                 variant="outlined"
                 required
                 fullWidth
-                id="title"
+                name="title"
                 label="Title"
+                value={values.title}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} s={12}>
@@ -80,12 +95,14 @@ function MainForm() {
                 fullWidth
                 multiline
                 rows="18"
-                id="lyrics"
+                name="lyrics"
                 label="Lyrics"
+                value={values.lyrics}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} s={12}>
-              <Themes />
+              <Themes stateValue={values.theme} changeStateValue={handleChange}/>
             </Grid>
             <Button
               type="submit"
